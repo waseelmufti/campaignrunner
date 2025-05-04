@@ -1,0 +1,35 @@
+{
+    "name": "waseelmufti/campaignrunner",
+    "description": "Campaign runner to create, manage, and run email campaigns",
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "WaseelMufti\\CampaignRunner\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Waseel Ahmad Mufti"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/collections": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/http": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/macroable": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/queue": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0",
+        "illuminate/database": "^8.12|^9.0|^10.0|^11.0|^12.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WaseelMufti\\CampaignRunner\\CampaignRunnerServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
