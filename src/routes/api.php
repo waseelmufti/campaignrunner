@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use WaseelMufti\CampaignRunner\Http\Controllers\CustomerController;
 use WaseelMufti\CampaignRunner\Http\Controllers\CampaignController;
+use WaseelMufti\CampaignRunner\Http\Controllers\CampaignCustomerController;
 
 
 Route::middleware('api')
@@ -10,9 +11,12 @@ Route::middleware('api')
 
         // Customer routes
         Route::post('customers/import-data', [CustomerController::class, 'importData']);
-        Route::resource('customers', CustomerController::class);
+        Route::apiResource('customers', CustomerController::class);
 
         // Campaign routes
-        Route::resource('campaigns',CampaignController::class);
+        Route::apiResource('campaigns', CampaignController::class);
+
+        // CampaignCustomer routes
+        Route::apiResource('campaigns.customers', CampaignCustomerController::class)->only(['index', 'store','destroy']);
     });
 

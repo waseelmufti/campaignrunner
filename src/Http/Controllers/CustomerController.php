@@ -10,7 +10,7 @@ use WaseelMufti\CampaignRunner\Contracts\CustomerRepositoryInterface;
 
 class CustomerController extends \App\Http\Controllers\Controller
 {
-    protected $customer;
+    protected $customers;
 
     public function __construct(CustomerRepositoryInterface $customers)
     {

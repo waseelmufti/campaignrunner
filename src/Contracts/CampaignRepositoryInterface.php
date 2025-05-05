@@ -2,6 +2,8 @@
 
 namespace WaseelMufti\CampaignRunner\Contracts;
 
+use WaseelMufti\CampaignRunner\Models\Campaign;
+
 interface CampaignRepositoryInterface
 {
     public function all();
@@ -15,4 +17,8 @@ interface CampaignRepositoryInterface
     public function delete($id);
 
     public function search(array $filters);
+
+    public function getCustomers(Campaign $campaign);
+
+    public function attachCustomers(Campaign $campaign, array $customers);
 }

@@ -99,42 +99,4 @@ class CampaignController extends \App\Http\Controllers\Controller
         $this->campaigns->delete($id);
         return response()->json(['status' => 'success', 'message' => 'Campaign deleted successfully']);
     }
-
-    public function importData(Request $request){
-
-        $validator = Validator::make($request->all(), [
-            'file' => 'required|file|extensions:sql,txt|max:1024',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => "error",
-                'message' => 'Validation failed.',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $path = $request->file('file')->getRealPath();
-        $sql = file_get_contents($path);
-
-        // Block CREATE DATABASE and CREATE TABLE statements
-        if (preg_match('/\bCREATE\s+(DATABASE|TABLE)\b/i', $sql)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'The SQL file contains CREATE DATABASE or CREATE TABLE statements, which are not allowed.'
-            ], 400);
-        }
-
-        try {
-            DB::unprepared($sql);
-            return response()->json([
-                'status' => "success",
-                'message' => 'SQL file imported successfully!'
-            ], 200);
-        } catch (\Exception $e) {
-            \Log::debug('Error importing SQL: ' . $e->getMessage());
-            return response()->json(['status' => 'error', 'message' => 'Something went wrong'], 500);
-        }
-    }
-
 }

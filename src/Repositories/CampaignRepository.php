@@ -10,7 +10,7 @@ class CampaignRepository implements CampaignRepositoryInterface
     private $pageSize;
 
     public function __construct(){
-        $this->pageSise = config('campaignrunner.page_size');
+        $this->pageSize = config('campaignrunner.page_size');
     }
 
     public function all()
@@ -57,6 +57,16 @@ class CampaignRepository implements CampaignRepositoryInterface
         }
 
         return $query->get();
+    }
+
+    public function getCustomers(Campaign $campaign)
+    {
+        return $campaign->customers()->paginate($this->pageSize);
+    }
+
+    public function attachCustomers(Campaign $campaign, array $customers)
+    {
+        return $campaign->customers()->attach($customers);
     }
 
 }
