@@ -14,6 +14,7 @@ Route::middleware('api')
         Route::apiResource('customers', CustomerController::class);
 
         // Campaign routes
+        Route::post('campaigns/{id}/run-campaign', [CampaignController::class, 'runCampaign']);
         Route::apiResource('campaigns', CampaignController::class);
 
         // CampaignCustomer routes

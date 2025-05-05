@@ -26,6 +26,8 @@ class CampaignRunnerServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'campaignrunner');
+
         $this->publishes([
             __DIR__.'/config/campaignrunner.php' => config_path('campaignrunner.php'),
         ], 'campaignrunner-config');
@@ -33,5 +35,9 @@ class CampaignRunnerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/routes/api.php' => base_path('routes/campaignrunner.php'),
         ], 'campaignrunner-routes');
+
+        $this->publishes([
+            __DIR__.'/resources/views' => resource_path('views/vendor/campaignrunner'),
+        ], 'campaignrunner-views');
     }
 }

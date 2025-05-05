@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "ce8baecc-dc5c-4ea7-853c-321a2ede5242",
+		"name": "FatherShop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5969778"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Import Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/goku/Downloads/customers (2).sql"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/import-data",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"import-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test12",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "+92328383829",
+									"type": "text"
+								},
+								{
+									"key": "plan_expiry_date",
+									"value": "2025-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/1001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/customers/1001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "+92328383829",
+									"type": "text"
+								},
+								{
+									"key": "plan_expiry_date",
+									"value": "2025-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers/1000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers?filters[status]=Expired&filters[expires_in_days]=7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "filters[status]",
+									"value": "Expired"
+								},
+								{
+									"key": "filters[expires_in_days]",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campaigns",
+			"item": [
+				{
+					"name": "Update Campaign",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Test Campaign Updated",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "update Test",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "<h1>Hello World!!</h1>",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "Inactive",
+									"type": "text"
+								},
+								{
+									"key": "expiry_date",
+									"value": "2025-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Campaign",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Campaign",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Test Campaign",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "New Test",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "<h1>Hello World</h1>",
+									"type": "text"
+								},
+								{
+									"key": "expiry_date",
+									"value": "2025-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/campaigns",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run Campaign",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Test Campaign",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "New Test",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "<h1>Hello World</h1>",
+									"type": "text"
+								},
+								{
+									"key": "expiry_date",
+									"value": "2025-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/{id}/run-campaign",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"{id}",
+								"run-campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Campagin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/campaigns",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Campaign",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campaigns Customers",
+			"item": [
+				{
+					"name": "Detach Customers from Campaign",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/1001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"1001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attach Campaign Customers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "filters[status]",
+									"value": "Paid",
+									"type": "text"
+								},
+								{
+									"key": "filters[expires_in_days]",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/2/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"2",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Campaign Campaigns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/campaigns/1/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"campaigns",
+								"1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8001/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://testproject.test/api/v1",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

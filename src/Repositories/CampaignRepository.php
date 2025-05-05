@@ -8,9 +8,11 @@ use WaseelMufti\CampaignRunner\Models\Campaign;
 class CampaignRepository implements CampaignRepositoryInterface
 {
     private $pageSize;
+    private $customerRepository;
 
-    public function __construct(){
+    public function __construct(CustomerRepository $customerRepository){
         $this->pageSize = config('campaignrunner.page_size');
+        $this->customerRepository = $customerRepository;
     }
 
     public function all()
@@ -59,14 +61,31 @@ class CampaignRepository implements CampaignRepositoryInterface
         return $query->get();
     }
 
-    public function getCustomers(Campaign $campaign)
+    public function getCustomers(Campaign $campaign, $isPaginated = false)
     {
-        return $campaign->customers()->paginate($this->pageSize);
+        $campaignQuery = $campaign->customers();
+        if($isPaginated){
+            return $campaignQuery->paginate($this->pageSize);
+        }
+
+        return $campaignQuery->get();
     }
 
-    public function attachCustomers(Campaign $campaign, array $customers)
+    public function attachCustomers(Campaign $campaign, array $customerFilters)
     {
-        return $campaign->customers()->attach($customers);
+        $customerIds = $this->customerRepository->search($customerFilters, ['id'], false);
+        $customerIds = $customerIds->pluck('id')->toArray();
+        return $campaign->customers()->sync($customerIds);
+    }
+
+    public function deleteCustomers(Campaign $campaign, array $customerIds = []){
+        return $campaign->customers()->detach($customerIds);
+    }
+
+    public function updateDeliveryStatus(Campaign $campaign, $customerId, $status){
+        return $campaign->customers()->updateExistingPivot($customerId, [
+            'delivery_status' => $status,
+        ]);
     }
 
 }

@@ -10,7 +10,7 @@ class CustomerRepository implements CustomerRepositoryInterface
     private $pageSize;
 
     public function __construct(){
-        $this->pageSise = config('campaignrunner.page_size');
+        $this->pageSize = config('campaignrunner.page_size');
     }
 
     public function all()
@@ -40,9 +40,13 @@ class CustomerRepository implements CustomerRepositoryInterface
         return Customer::destroy($id);
     }
 
-    public function search(array $filters)
+    public function search(array $filters, array $select = [], $isPaginated = true)
     {
         $query = Customer::query();
+
+        if(!empty($select)){
+            $query->select($select);
+        }
 
         if (!empty($filters['status'])) {
             $query->where('status', $filters['status']);
@@ -52,7 +56,9 @@ class CustomerRepository implements CustomerRepositoryInterface
             $query->whereDate('plan_expiry_date', '<=', now()->addDays($filters['expires_in_days']));
         }
 
-        return $query->paginate($this->pageSize);
+        if($isPaginated){
+            return $query->paginate($this->pageSize);
+        }
+        return $query->get();
     }
-
 }

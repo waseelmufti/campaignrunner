@@ -6,6 +6,7 @@ use WaseelMufti\CampaignRunner\Models\Campaign;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use WaseelMufti\CampaignRunner\Jobs\SendCampaignEmailJob;
 use WaseelMufti\CampaignRunner\Contracts\CampaignRepositoryInterface;
 
 class CampaignController extends \App\Http\Controllers\Controller
@@ -99,4 +100,21 @@ class CampaignController extends \App\Http\Controllers\Controller
         $this->campaigns->delete($id);
         return response()->json(['status' => 'success', 'message' => 'Campaign deleted successfully']);
     }
+
+    public function runCampaign($id)
+    {
+        $campaign = $this->campaigns->find($id);
+
+        if(!$campaign){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Campaign not found'
+            ], 404);
+        }
+
+        SendCampaignEmailJob::dispatch($campaign);
+
+        return response()->json(['status' => 'success', 'message' => 'Emails queued for sending.'], 200);
+    }
+
 }

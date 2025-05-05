@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use WaseelMufti\CampaignRunner\Contracts\CampaignRepositoryInterface;
+use WaseelMufti\CampaignRunner\Contracts\CustomerRepositoryInterface;
 
 class CampaignCustomerController extends \App\Http\Controllers\Controller
 {
     protected $campaigns;
     protected $customers;
 
-    public function __construct(CampaignRepositoryInterface $campaigns, CampaignRepositoryInterface $customers)
+    public function __construct(CampaignRepositoryInterface $campaigns, CustomerRepositoryInterface $customers)
     {
         $this->campaigns = $campaigns;
         $this->customers = $customers;
@@ -27,7 +28,7 @@ class CampaignCustomerController extends \App\Http\Controllers\Controller
         }
 
         $customers = $this->campaigns->getCustomers($campaign);
-        return response()->json(['status' => 'success', 'data' => $customers]);
+        return response()->json(['status' => 'success', 'data' => ["campagin" => $campaign, "customers" => $customers]]);
     }
 
     public function store(Request $request, $campaign)
@@ -51,17 +52,23 @@ class CampaignCustomerController extends \App\Http\Controllers\Controller
             ], 422);
         }
         $data = $validator->validated();
-        // $campaign = $this->campaigns->create($data);
+        $response = $this->campaigns->attachCustomers($campaign, $data["filters"]);
+
         return response()->json([
-                'status' => 'success',
-                'message' => 'Campaign created successfully.',
-                'data' => $campaign]);
+            'status' => 'success',
+            'message' => 'Customers attachted to Campaign successfully.',
+        ]);
     }
 
-    public function destroy($id)
+    public function destroy($campaign, $customer)
     {
-        $this->campaigns->delete($id);
-        return response()->json(['status' => 'success', 'message' => 'Campaign deleted successfully']);
+        $campaign = $this->campaigns->find($campaign);
+        if (!$campaign) {
+            return response()->json(['status' => 'error', 'message' => 'Campaign not found'], 404);
+        }
+
+        $this->campaigns->deleteCustomers($campaign, [$customer]);
+        return response()->json(['status' => 'success', 'message' => 'Customer detached successfully']);
     }
 
 }

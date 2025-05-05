@@ -21,4 +21,8 @@ interface CampaignRepositoryInterface
     public function getCustomers(Campaign $campaign);
 
     public function attachCustomers(Campaign $campaign, array $customers);
+
+    public function deleteCustomers(Campaign $campaign, array $customerIds);
+
+    public function updateDeliveryStatus(Campaign $campaign, $customerId, $status);
 }
