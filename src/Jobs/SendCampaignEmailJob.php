@@ -35,7 +35,7 @@ class SendCampaignEmailJob implements ShouldQueue
 
         try {
 
-            foreach($campaignRepo->getCustomers($this->campaign, false)->chunk($this->pageSize) as $customers){
+            foreach($campaignRepo->getCustomers($this->campaign, false, ['status' => 'Queued'])->chunk($this->pageSize) as $customers){
                 foreach($customers as $customer){
                     $currentCustomerId = $customer->id;
                     Mail::to($customer->email)->send(new CampaignEmail($this->campaign, $customer));

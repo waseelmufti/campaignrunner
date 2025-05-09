@@ -61,9 +61,13 @@ class CampaignRepository implements CampaignRepositoryInterface
         return $query->get();
     }
 
-    public function getCustomers(Campaign $campaign, $isPaginated = false)
+    public function getCustomers(Campaign $campaign, $isPaginated = false, array $pivotFilters = [])
     {
         $campaignQuery = $campaign->customers();
+        if(!empty($pivotFilters)){
+            $campaignQuery->wherePivot($pivotFilters);
+        }
+
         if($isPaginated){
             return $campaignQuery->paginate($this->pageSize);
         }

@@ -11,6 +11,10 @@ class CampaignRunnerServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $thia->mergeConfigFrom(
+            __DIR__.'/config/campaignrunner.php', 'campaignrunner-config'
+        );
+
         $this->app->bind(CustomerRepositoryInterface::class, CustomerRepository::class);
         $this->app->bind(CampaignRepositoryInterface::class, CampaignRepository::class);
 
