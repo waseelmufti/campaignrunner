@@ -11,7 +11,7 @@ class CampaignRunnerServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $thia->mergeConfigFrom(
+        $this->mergeConfigFrom(
             __DIR__.'/config/campaignrunner.php', 'campaignrunner-config'
         );
 

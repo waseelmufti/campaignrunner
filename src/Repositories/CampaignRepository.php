@@ -64,8 +64,8 @@ class CampaignRepository implements CampaignRepositoryInterface
     public function getCustomers(Campaign $campaign, $isPaginated = false, array $pivotFilters = [])
     {
         $campaignQuery = $campaign->customers();
-        if(!empty($pivotFilters)){
-            $campaignQuery->wherePivot($pivotFilters);
+        if(!empty($pivotFilters['delivery_status'])){
+            $campaignQuery->wherePivot('delivery_status', $pivotFilters['delivery_status']);
         }
 
         if($isPaginated){
